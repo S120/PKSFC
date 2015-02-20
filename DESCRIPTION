@@ -1,0 +1,15 @@
+Package: PKSFC
+Title: post keynesian stock flow consistent modelling
+Version: 1.1
+Date: 24-10-2014
+Author: Antoine Godin <Antoine.Godin@ul.ie>
+Maintainer: Antoine Godin <Antoine.Godin@ul.ie>
+Description: Package (beta version) to simulate Post-Keynesian Stock-Flow
+    Consistent Models,following the approach of Godley, W. and M. Lavoie, 2007:
+    Monetary Economics An Integrated Approach to Credit,Money, Income,
+    Production and Wealth. Palgrave MacMillan, New York.
+Depends:
+    R (>= 3.1.1),expm,igraph
+Suggests:
+    Rgraphviz
+License: GPL
