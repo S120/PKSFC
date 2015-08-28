@@ -81,7 +81,7 @@ sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F){
         equation<-trim(equation)
         value<-as.double(equation)
         if(!is.na(value)){
-          nameEndSearch = gsub("in","inv",nameEnd)
+          nameEndSearch = gsub("\\bin\\b","inv",nameEnd)
           nameEndSearch<-trim(nameEndSearch)
           indEnd<-sfc.getIndex(model,end=nameEndSearch)
           if(indEnd>0){

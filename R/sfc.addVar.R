@@ -12,7 +12,7 @@
 #' @export
 
 sfc.addVar<-function(model=stop("Need a model"),var=stop("Need a variable name!"),init="NA",desc=""){
-  var = gsub("in","inv",var)
+  var = gsub("\\bin\\b","inv",var)
   var<-trim(var)
   
   if(is.null(model$variables)){

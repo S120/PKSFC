@@ -13,9 +13,9 @@
 
 sfc.addEqu<-function(model=stop("Need a model"),var=stop("Need a variable name!"),eq=stop("Need an equation!"),desc=""){
   
-  variable = gsub("in","inv",var)
+  variable = gsub("\\bin\\b","inv",var)
   variable<-trim(variable)
-  equation = gsub("in","inv",eq)
+  equation = gsub("\\bin\\b","inv",eq)
   equation<-trim(equation)
   #replacing all lags. This might be an issue if there are a lag of 2 but not of 1.
   lag=1

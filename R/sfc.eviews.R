@@ -42,7 +42,7 @@ sfc.eviews <-function(fileName,modelName="SFCmodel"){
         if (grepl("displayname", myTable[1])) {
           myTable2=strsplit(myTable[[1]][1],"\\.")
           name=myTable2[[1]][1]
-          nameSearch=gsub("in","inv",name)
+          nameSearch=gsub("\\bin\\b","inv",name)
           ind=sfc.getIndex(model,var=nameSearch)
           displayName=""
           for(j in 2:length(myTable[[1]])){
@@ -86,7 +86,7 @@ sfc.eviews <-function(fileName,modelName="SFCmodel"){
         }else{
           displayEquation=""
         }
-        nameEndSearch=gsub("in","inv",nameEnd)
+        nameEndSearch=gsub("\\bin\\b","inv",nameEnd)
         ind = sfc.getIndex(model,var=nameEndSearch)
         if(ind<0){
           warning("The equation ",lineText," has an endogenous variable ",nameEndSearch," which is not declared.")
@@ -111,10 +111,10 @@ sfc.eviews <-function(fileName,modelName="SFCmodel"){
       else if (grepl("=", lineText)) {
         myTable = strsplit(lineText, "=")
         name=myTable[[1]][1]
-        nameSearch=gsub("in","inv",name)
+        nameSearch=gsub("\\bin\\b","inv",name)
         nameSearch<-trim(nameSearch)
         ind=sfc.getIndex(model,var=nameSearch)
-        value=gsub("in","inv",myTable[[1]][2])
+        value=gsub("\\bin\\b","inv",myTable[[1]][2])
         value<-trim(value)
         if(ind<0){
           model<-sfc.addVar(model,name,value,NA)

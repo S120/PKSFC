@@ -14,7 +14,7 @@
 
 sfc.addEnd<-function(model=stop("Need a model"),var=stop("Need a variable name!"),init=NA,lag=0,desc=NA){
   
-  variable = gsub("in","inv",var)
+  variable = gsub("\\bin\\b","inv",var)
   variable<-trim(variable)
   
   if(is.null(model$endogenous)){

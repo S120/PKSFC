@@ -25,7 +25,7 @@ sfc.editEqu<-function(model=stop("Need a model"),ind=NA,var=NA,eq=NA,desc=NA){
           stop("The model does not contain an equation for ",var)
         }
       }
-      eq = gsub("in","inv",eq)
+      eq = gsub("\\bin\\b","inv",eq)
       eq<-trim(eq)
       #replacing all lags. This might be an issue if there are a lag of 2 but not of 1.
       lag=1
