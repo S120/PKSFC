@@ -1,18 +1,6 @@
----
-output: pdf_document
----
-
-###Description of the package
-
-This package allows to simulate Post-Keynesian Stock-Flow Consistent Models, following the approach of Godley, W. and M. Lavoie, 2007: Monetary Economics An Integrated Approach to Credit, Money, Income, Production and Wealth. Palgrave MacMillan, New York. The package uses the Gauss-Seidel algorithm to solve linear systems of equations, following the approach found in Kinsella, Stephen and O'Shea, Terence, Solution and Simulation of Large Stock Flow Consistent Monetary Production Models Via the Gauss Seidel Algorithm (December 21, 2010). Journal of Policy Modeling, Forthcoming. Available at SSRN: <a href="http://ssrn.com/abstract=1729205">http://ssrn.com/abstract=1729205</a> or <a href="http://dx.doi.org/10.2139/ssrn.1729205">http://dx.doi.org/10.2139/ssrn.1729205</a> 
-
-This package works with R, more information about R can be found here: <a href="http://www.r-project.org"/>http://www.r-project.org</a>. I recomend to use R studio (<a href="http://www.rstudio.com/">http://www.rstudio.com</a>) for its simplicity, but any other solution will work.
-
-I thank David O'Sullivan and Hamid Raza for their valuable help in developping the package. I gratefully acknowledge the support of the Institute for New Economic Thinking.
-
 ###Installation
 
-The package can be downloaded here and is still in a beta version. Note that the package needs a version of R above or equal to 3.1.1. Furthermore, you will need to install expm and igraph. For those who never installed a package in R, you will need to use the following command.
+The package can be downloaded in the root folder. Note that the package needs a version of R above or equal to 3.1.1. Furthermore, you will need to install expm and igraph. For those who never installed a package in R, you will need to use the following command.
 
 ```{r, eval=F}
 install.packages("expm")
