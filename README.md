@@ -10,5 +10,15 @@ I thank David O’Sullivan and Hamid Raza for their valuable help in developping
 
 - The source code of the package can be found in the folder Package
 - The folder Tutorials contains descriptions of how to install and use the package in R
+  - Each tutorial is described below the contents and can be downloaded as a pdf file.
+  - You will need to download the PKSFC_x.y.tar.gz file and install it, as described in the first tutorial
 - Godley and Lavoie DAGs contains DAG representation of all model presented in their book
-- The last version of the package is found in the PKSFC_x.y.tar.gz. Download it to install the package without having to download the source code. You will need that tar.gz file to run the examples that are in the Tutorials folder.
+- The last version of the package is found in the PKSFC_x.y.tar.gz. Download it to install the package without having to download the source code. 
+
+Copyright (c) 2013 Antoine Godin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

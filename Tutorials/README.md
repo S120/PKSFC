@@ -149,8 +149,6 @@ legend(x=1944,y=130,legend=c("Wealth","Consumption","Disposable Income",
                              "Expecetd Disposable Income"),lty=c(1,2,3,4),bty="n")
 ```
 
-
-
 Copyright (c) 2013 Antoine Godin
 
 Permission is hereby granted, free
