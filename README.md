@@ -11,3 +11,4 @@ I thank David O’Sullivan and Hamid Raza for their valuable help in developping
 - The source code of the package can be found in the folder Package
 - The folder Tutorials contains descriptions of how to install and use the package in R
 - Godley and Lavoie DAGs contains DAG representation of all model presented in their book
+- The last version of the package is found in the PKSFC_x.y.tar.gz. Download it to install the package without having to download the source code. You will need that tar.gz file to run the examples that are in the Tutorials folder.
