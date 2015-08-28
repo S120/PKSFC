@@ -1,0 +1,75 @@
+#####PARAMETERS
+alpha1_n = 0.6
+alpha1_s = 0.7
+alpha2_n = 0.4
+alpha2_s = 0.3
+lambda0_n = 0.635
+lambda0_s = 0.67
+lambda1_n = 5
+lambda1_s = 6
+lambda2_n = 0.01
+lambda2_s = 0.07
+mu_n = 0.18781
+mu_s = 0.18781
+theta = 0.2
+#####EXOGENOUS
+g_n = 20
+g_s = 20
+r_bar = 0.025
+r = 0.025
+b_h_n = 64.865
+b_h_s = 64.865
+b_s = 172.74
+v_n = 86.487
+v_s = 86.487
+h_s = 43.244
+b_cb = 43.244
+#####Add equations to model REG
+#####Determination of national income in Region N - eq. 6.1
+y_n = (cons_n + g_n + x_n)/(1+ mu_n)
+y_s = (cons_s + g_s + x_s)/(1+ mu_s)
+im_n = x_s
+im_s = x_n
+x_n = mu_s*y_s
+x_s = mu_n*y_n
+#####Consumption function - eq. 6.13
+cons_n = alpha1_n*yd_n + alpha2_n*v_n(-1)
+cons_s = alpha1_s*yd_s + alpha2_s*v_s(-1)
+#####Disposable income - eq. 6.7
+yd_n = y_n - t_n + r(-1)*b_h_n(-1)
+yd_s = y_s - t_s + r(-1)*b_h_s(-1)
+#####Tax payments - eq. 6.9
+t_n = theta*(y_n + r(-1)*b_h_n(-1))
+t_s = theta*(y_s + r(-1)*b_h_s(-1))
+#####Wealth accumulation - eq. 6.11
+v_n = v_n(-1) + (yd_n - cons_n)
+v_s = v_s(-1) + (yd_s - cons_s)
+#####Cash money held - eq. 6.15
+h_h_n = v_n - b_h_n
+h_h_s = v_s - b_h_s
+#####Demand for government bills - eq. 6.17
+b_h_n = v_n*(lambda0_n + lambda1_n*r - lambda2_n*(yd_n/v_n))
+b_h_s = v_s*(lambda0_s + lambda1_s*r - lambda2_s*(yd_s/v_s))
+#####Overall tax payments - eq. 6.19
+t = t_n + t_s
+#####Overall government expenditure - eq. 6.20
+g = g_n + g_s
+#####Total bills outstanding - eq. 6.21
+b_h = b_h_n + b_h_s
+#####Total cash outstanding - eq. 6.22
+h_h = h_h_n + h_h_s
+#####Supply of government bills - eq. 6.23
+b_s = b_s(-1) + (g + r(-1)*b_s(-1)) - (t + r(-1)*b_cb(-1))
+#####Supply of cash - eq. 6.24
+h_s = h_s(-1) + b_cb - b_cb(-1)
+#####Government bills held by the central bank - eq. 6.25
+b_cb = b_s - b_h
+#####VARIABLES FOR SHOCKS
+####CHANGE IN HOUSEHOLD WEALTH
+HHW=v_s-v_s(-1)
+#####GOVT BALANCE
+GOV=t_s-(g_s+r*b_h_s(-1))
+####TRADE BALANCE OF THE S- REGION
+TBAL= x_s - im_s
+r=r(-1)
+timeline 1945 2010
