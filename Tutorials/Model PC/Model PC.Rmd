@@ -1,7 +1,7 @@
 ---
 author: "Antoine Godin"
-bibliography: All.bib
-output: html_document
+bibliography: Bibliography.bib
+output: pdf_document
 ---
 
 ###Setting up the environment
