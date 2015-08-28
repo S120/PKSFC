@@ -1,0 +1,42 @@
+#######Determination of output - eq. 4.1
+y = cons + g
+#######Disposable income - eq. 4.2
+yd = y - t + r(-1)*b_h(-1)
+#######Tax payments - eq. 4.3
+t = theta*(y + r(-1)*b_h(-1))
+#######Wealth accumulation - eq. 4.4
+v = v(-1) + (yd - cons)
+#######Consumption function - eq. 4.5
+cons = alpha1*yd + alpha2*v(-1)
+#######Cash money - eq. 4.6
+h_h = v - b_h  
+#######Demand for government bills - eq. 4.7
+b_h = v*(lambda0 + lambda1*r - lambda2*(yd/v))
+#######Supply of government bills - eq. 4.8
+b_s = b_s(-1) + (g + r(-1)*b_s(-1)) - (t + r(-1)*b_cb(-1))
+#######Supply of cash - eq. 4.9
+h_s = h_s(-1) + b_cb - b_cb(-1)
+#######Government bills held by the central bank - eq. 4.10
+b_cb = b_s - b_h
+#######Interest rate as policy instrument - eq. 4.11
+r = r_bar
+#######  PARAMETERS
+alpha1=0.6
+alpha2=0.4
+lambda0 = 0.635
+lambda1 = 5
+lambda2 = 0.01
+theta=0.2
+#######  EXOGENOUS
+g=20
+r_bar = 0.025
+#######  Starting values for stocks
+b_cb = 21.62162
+b_h = 64.86486
+b_s = 86.48649
+h_h = 21.62162
+h_s = 21.62162
+r = 0.025
+v = 86.48649
+#######End of model
+timeline 1945 2010

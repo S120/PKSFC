@@ -1,0 +1,12 @@
+#MODEL SIM
+C_s = C_d
+G_s = G_d
+T_s = T_d
+N_s = N_d
+Yd = W*N_s - T_s
+T_d = theta*W*N_s
+C_d = alpha1*Yd + alpha2*H_h(-1)
+H_s = H_s(-1) + G_d - T_d
+H_h = H_h(-1) + Yd - C_d
+Y = C_s + G_s
+N_d = Y/W

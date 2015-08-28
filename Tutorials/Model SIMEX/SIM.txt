@@ -1,0 +1,27 @@
+#1. EQUATIONS
+c_s = c_d
+g_s = g_d
+t_s = t_d
+n_s = n_d
+yd = w*n_s - t_s
+t_d = theta*w*n_s
+c_d = alpha1*yd + alpha2*h_h(-1)
+h_s = h_s(-1) + g_d - t_d
+h_h = h_h(-1) + yd - c_d
+y = c_s + g_s
+n_d = y/w
+#VARIABLE USED FOR PLOTS
+dh_s = h_s - h_s(-1)
+dh_h = h_h - h_h(-1)
+#2. PARAMETERS
+alpha1=0.6
+alpha2=0.4
+theta=0.2
+#EXOGENOUS
+g_d=20
+w=1
+#INITIAL VALUES
+h_s=0
+h_h=0
+#3. Timeline
+timeline 1945 2010

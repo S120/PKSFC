@@ -1,0 +1,26 @@
+#1. EQUATIONS
+C_s = C_d
+G_s = G_d
+T_s = T_d
+N_s = N_d
+Yd = W*N_s - T_s
+T_d = theta*W*N_s
+C_d = alpha1*Yd_e + alpha2*H_h(-1)
+H_s = H_s(-1) + G_d - T_d
+H_h = H_h(-1) + Yd - C_d
+Y = C_s + G_s
+Yd_e = Yd(-1)
+N_d = Y/W
+#2. PARAMETERS
+alpha1=0.6
+alpha2=0.4
+theta=0.2
+#EXOGENOUS
+G_d=20
+W=1
+#INITIAL VALUES
+H_s=0
+H_h=0
+Yd=0
+#3. Timeline
+timeline 1945 2010
