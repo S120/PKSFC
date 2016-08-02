@@ -20,7 +20,7 @@ plot.sankey <- function(dataset=stop("Need a dataset to plot a sanket"), filenam
 		flows<-rownames(flowmat)
 		flows_id<-rownames(flowmat)
 		nbSectors<-length(sectors_id)
-		nbflows<-length(flows_id)
+		nbFlows<-length(flows_id)
 		
 		nodes<-data.frame(ID=c(paste(sectors_id,"_Exp",sep=""),flows_id,paste(sectors_id,"_Inc",sep="")),x=c(rep(1,length(sectors_id)),rep(2,length(flows_id)),rep(3,length(sectors_id))),label=c(sectors,flows,sectors))
 		source<-c()

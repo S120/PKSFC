@@ -45,11 +45,10 @@ generate.DAG.collapse = function(adjacency){
   # no degree
   
   if(is.DAG(g_DAG, IGRAPH = TRUE) == TRUE){
-    print("We now have a DAG to work with!")
     results = list()
     results$orginal_graph = g
     results$SCC_graph = SCC_graph
     results$DAG = g_DAG
     return(results)
-  }else{print("woops! Somethings after going wrong, function did not results in a DAG!")}
+  }else{warning("woops! Somethings after going wrong, function did not result in a DAG!")}
 }

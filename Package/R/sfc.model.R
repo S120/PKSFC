@@ -111,8 +111,8 @@ sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F){
     }
   }
   
-  model<-sfc.check(model,fill=fill)
-  
   options(warn=0)
+  
+  model<-sfc.check(model,fill=fill)
   return(model)
 }
