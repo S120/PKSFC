@@ -72,14 +72,14 @@ sfc.check<-function(model=stop("Need a model"),fill=F){
   #This section deals with the lags
   for (j in 1:length(model$endogenous[,1])) {
     for (i in 1:length(model$equations[,1])) {
-      temp <- gsub("[ \t\n\r\f\v()/\\+\\<\\>\\*-]+"," ",paste(" ",model$equations[i,2]))
+      temp <- gsub("[ \t\n\r\f\v()/\\+\\<\\>\\*\\=\\!|\\,\\&\\-]+"," ",paste(" ",model$equations[i,2]))
       ind <- regexpr(paste("([ \t\n\r\f\v])",model$endogenous[j, 1],"_([0-9])",sep=""), temp)
       while (ind[1] > -1) {
         temp <- substring(temp, ind[1] + nchar(model$endogenous[j, 1])+1)
         if (nchar(temp) > 0 && substr(temp, 0, 1) == "_") {
           value <-as.integer(substr(temp,2,3))
           if (!is.na(value)) {
-            model<-sfc.editEnd(model,ind=j,lag=max(model$endogenous[j,3],value))
+            model<-sfc.editEnd(model,ind=j,lag=max(as.numeric(model$endogenous[j,3]),value))
           }
         }
         ind <- regexpr(paste("([ \t\n\r\f\v])",model$endogenous[j, 1],"_([0-9])",sep=""), temp)
@@ -112,7 +112,7 @@ sfc.check<-function(model=stop("Need a model"),fill=F){
   equEndMatrix = matrix(data = 0, nrow = length(model$endogenous[, 1]), ncol = length(model$equations[, 1]),dimnames=list(c(model$endogenous[,1]),c(model$equations[,1])))
   for (j in 1:length(model$endogenous[, 1])) {
     ind <- which(model$equations[, 1] == model$endogenous[j, 1])
-    temp <- gsub("[ \t\n\r\f\v()/\\<\\>\\+\\*-]+", " ", model$equations[ind, 2])
+    temp <- gsub("[ \t\n\r\f\v()/\\+\\<\\>\\*\\=\\!|\\,\\&\\-]+", " ", model$equations[ind, 2])
     for (i in 1:length(model$endogenous[, 1])) {
       ind2 <- regexpr(paste("([ \t\n\r\f\v]|^)", model$endogenous[i, 1], "([ \t\n\r\f\v]|$)", sep = ""), temp)
       if (length(ind2)>0&&ind2 > -1) {

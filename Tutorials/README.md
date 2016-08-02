@@ -9,10 +9,6 @@ install.packages("igraph")
 
 Once those packages have been installed, download the PK-SFC package on your computer and store it in a folder of your choice. Make sure that the name of the package is "PKSFC_1.1.tar.gz". Then run the following comand line. It will install the package from your local folder where 'pathToYourFolder' represent the path to the folder where you downloaded the package.
 
-```{r, echo=F}
-install.packages("~/Dropbox/Research/R projects/PKSFC_1.2.tar.gz",repos = NULL, type="source")
-```
-
 ```{r, eval=F}
 install.packages("pathToYourFolder/PKSFC_1.2.tar.gz",repos = NULL, type="source")
 ```

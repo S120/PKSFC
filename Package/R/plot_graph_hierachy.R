@@ -1,6 +1,6 @@
 #' Plot igraph objects hierarchy structure
 #' 
-#' @param graph an igraph object.
+#' @param model an sfc model.
 #' @param ... plot options for graph objects
 #'
 #' @export
@@ -8,11 +8,11 @@
 #' 
 #' @examples
 #' data( models )
-#' g = generate.DAG.collaspe( adjacency = sim$matrix )$orginal_graph
-#' plot_graph_hierarchy( graph = g )
+#' plot_graph_hierarchy( model=sim)
 #' 
 
-plot_graph_hierarchy = function(graph,...){
+plot_graph_hierarchy = function(model,...){
+  graph=generate.DAG.collaspe(adjacency=t(model$matrix))$orginal_graph
   if( require(Rgraphviz) ){
     graph_nel = igraph.to.graphNEL(graph)
     graph_attributes = makeNodeAttrs(g = graph_nel,label = unlist(V(graph)$name),fillcolor = V(graph)$color)
