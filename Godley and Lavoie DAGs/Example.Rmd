@@ -29,14 +29,13 @@ The adjacency matrix for the system can be found by using `$matrix`.
 The next segment of codes takes the adjacency matrix and returns a list of igraph objects corresponding to the original graph, the nodes that form cycles and the resulting DAG for the system.
 
 ````{r, results='hide'}
-graphs = generate.DAG.collaspe( adjacency = model$matrix )
+graphs = generate.DAG.collapse( adjacency = model$matrix )
 ````
 
 If instead of using an adjacency matrix, you wanted to use an igraph object, adding the argument `IGRAPH = TRUE` will allow the three graphs to be required with no errors.
 
 ````{r, eval=FALSE}
-g = graph.adjacency(adjmatrix = model$matrix,mode = "directed")
-graphs = generate.DAG.collaspe(g, IGRAPH = TRUE)
+graphs = generate.DAG.collapse(model$matrix)
 ````
 
 ### Step 4: Generating graphics

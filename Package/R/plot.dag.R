@@ -12,7 +12,7 @@
 #' 
 
 plot.dag = function(model,...){
-  graph=generate.DAG.collaspe(adjacency=t(model$matrix))$orginal_graph
+  graph=generate.DAG.collapse(adjacency=t(model$matrix))$orginal_graph
   if( require(Rgraphviz) ){
     graph_nel = igraph.to.graphNEL(graph)
     graph_attributes = makeNodeAttrs(g = graph_nel,label = unlist(V(graph)$name),fillcolor = V(graph)$color)

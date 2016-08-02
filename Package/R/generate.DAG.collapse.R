@@ -13,7 +13,7 @@
 #' data( models )
 #' generate.DAG.collaspe( sim$matrix )
 #' 
-generate.DAG.collaspe = function(adjacency){
+generate.DAG.collapse = function(adjacency){
   # function will return the resulting DAG graph by collasping problem SCC nodes into one (these nodes will)
   # also be returned
   

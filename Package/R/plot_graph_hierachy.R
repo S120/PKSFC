@@ -11,8 +11,7 @@
 #' plot_graph_hierarchy( model=sim)
 #' 
 
-plot_graph_hierarchy = function(model,...){
-  graph=generate.DAG.collaspe(adjacency=t(model$matrix))$orginal_graph
+plot_graph_hierarchy = function(graph,...){
   if( require(Rgraphviz) ){
     graph_nel = igraph.to.graphNEL(graph)
     graph_attributes = makeNodeAttrs(g = graph_nel,label = unlist(V(graph)$name),fillcolor = V(graph)$color)
