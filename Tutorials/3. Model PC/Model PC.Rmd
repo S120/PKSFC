@@ -33,8 +33,7 @@ library("Rgraphviz")
 
 We can now look at the graph of model PC:
 ```{r}
-plot_graph_hierarchy(graph=generate.DAG.collaspe(adjacency=t(pc$matrix))$orginal_graph,
-                     main="PC" )
+plot.dag(pc,main="PC" )
 ```
 
 You can see that there is a cycle in the graph, implying that GDP, taxes, disposable income and consumption are determined all together (and that they fully adapt to any shock applied to the economy). While this is a mathematical property of the system of equations representing the economy we wish to model, it has an economic meaning and you want to be sure that this is what you believe to be the best representation of what you have in mind.
@@ -62,8 +61,7 @@ You probably have noticed that the `yde` equation contains the R function `rnorm
 
 Before simulatin the model, let's have a look at how the graph of the model has changed:
 ```{r}
-plot_graph_hierarchy(graph=generate.DAG.collaspe(adjacency=t(pcRand$matrix))$orginal_graph,
-                     main="PC Random" )
+plot.dag(pcRand,main="PC Random" )
 ```
 
 You can now see that the cycle observed in the original model has disapeared. Indeed, consumption doesn't depend on disposable income anymore but on expected disposable income. Let's now simulate the model.

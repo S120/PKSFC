@@ -111,12 +111,11 @@ library("Rgraphviz")
 We can now test these functionalities and compare the DGs of model SIM and SIMEX:
 
 ```{r}
+sim<-sfc.model("SIM.txt",modelName="SIMplest model")
 simex<-sfc.model("SIMEX.txt",modelName="SIMplest model with expectation")
 layout(matrix(c(1,2),1,2))
-plot_graph_hierarchy(simex,
-                     main="SIM" )
-plot_graph_hierarchy(simex,
-                     main="SIMEX" )
+plot.dag(sim, main="SIM" )
+plot.dag(simex, main="SIMEX" )
 ```
 
 A close look at the two generated figures shows the fundamental difference between SIM and SIMEX. The SIM graph contains a cycle (all the nodes in red), that is it is composed by a system of dependent equations that determine GDP, Employment, Consumption, Taxes and Disposable income at once. Asside from the mathematical implication that a system of equation represent, it also has an economic meaning. It implies that the economy represented by SIM will adjust in one period to any shock applied to government spending. 
