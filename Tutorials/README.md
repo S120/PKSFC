@@ -21,7 +21,7 @@ library(PKSFC)
 
 ###Testing
 
-In order to test wether the package was correctly installed, we will run the simulation with the model SIM of the third chapter of Godley and Lavoie's Monetary Economics. To do so you need to download the source code for the SIM model ([SIM.txt](https://github.com/S120/PKSFC/files/436908/SIM.txt)) in the resource tab of this page and make sure to save it in your current directory. Once this is done you should be able to run the following comand line and load the model. The code loads the model described in SIM.txt in the object 'sim', note that you can also specify a more elaborate model name using the modelName option.
+In order to test wether the package was correctly installed, we will run the simulation with the model SIM of the third chapter of Godley and Lavoie's Monetary Economics. To do so you need to download the source code for the SIM model ([SIM.txt](https://github.com/S120/PKSFC/files/436908/SIM.txt)) and make sure to save it in your current directory. Once this is done you should be able to run the following comand line and load the model. The code loads the model described in SIM.txt in the object 'sim', note that you can also specify a more elaborate model name using the modelName option.
 
 ```{r}
 sim<-sfc.model("SIM.txt",modelName="SIMplest model from chapter 3 of Godley and Lavoie (2007)")
@@ -110,7 +110,7 @@ In order to test for the success of the installation:
 library("Rgraphviz")
 ```
 
-We can now test these functionalities and compare the DGs of model SIM and SIMEX:
+We can now test these functionalities and compare the DGs of model SIM and SIMEX ([source code of SIMEX](https://github.com/S120/PKSFC/files/436907/SIMEX.txt)):
 
 ```{r}
 sim<-sfc.model("SIM.txt",modelName="SIMplest model")
