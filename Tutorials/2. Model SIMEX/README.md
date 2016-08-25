@@ -7,7 +7,7 @@ Before doing any modelling, we need to load the package in the R environment.
 library(PKSFC)
 ```
 
-The, you need to download the two attached 'SIM.txt' and 'SIMEX.txt' file and save it in the folder of your choice. Make sure to set the working directory where you saved the downloaded file. In comand line this looks like this but if you use Rstudio, you can use the graphical interface as well (Session>Set Working Dirctory>Choose Directory)
+The, you need to download the two attached [SIM.txt](https://github.com/S120/PKSFC/files/436955/SIM.txt) and [SIMEX.txt](https://github.com/S120/PKSFC/files/436956/SIMEX.txt) file and save it in the folder of your choice. Make sure to set the working directory where you saved the downloaded file. In comand line this looks like this but if you use Rstudio, you can use the graphical interface as well (Session>Set Working Dirctory>Choose Directory)
 ```{r, eval=FALSE}
 setwd("pathToYourDirectory")
 ```
@@ -31,6 +31,17 @@ round(t(datasimex$baseline[c(1,2,3,66),c("G_d","Y","T_s","Yd","Yd_e","C_d","H_s"
       digits=1)
 ```
 
+|     | 1945| 1946| 1947| 2010|
+|:----|----:|----:|----:|----:|
+|G_d  |   20|   20| 20.0|   20|
+|Y    |   NA|   20| 36.0|  100|
+|T_s  |   NA|    4|  7.2|   20|
+|Yd   |    0|   16| 28.8|   80|
+|Yd_e |   NA|    0| 16.0|   80|
+|C_d  |   NA|    0| 16.0|   80|
+|H_s  |    0|   16| 28.8|   80|
+|H_h  |    0|   16| 28.8|   80|
+
 This replicates figure 3.5 page 82
 ```{r}
 plot(simex$time,datasimex$baseline[,"Yd"],type="l",xlab="",ylab="",lty=2)
@@ -39,6 +50,8 @@ lines(simex$time,vector(length=length(simex$time))+datasimex$baseline["2010","Yd
 legend(x=1970,y=50,legend=c("Disposable Income","Expected Disposable Income","Steady State"),
        lty=c(2,3,1),bty="n")
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969058/12c02d30-6ac8-11e6-81df-eb36c8ed1f98.png)
 
 ###Gauss-Seidel and solving a PK-SFC model with the package
 If you have run the SIM model, you probably have noted the difference in time needed to obtain the results for model SIM and model SIMEX. We can confirm this impression by computing the simulation time. We can thus load the SIM model and then compare both timing.
@@ -106,6 +119,20 @@ round(t(dataex$baseline[c(1,2,20,40,66),
                           "iter block 4","iter block 5","iter block 6")]),digits=3)
 ```
 
+|             | 1945| 1946| 1964| 1984| 2010|
+|:------------|----:|----:|----:|----:|----:|
+|iter block 1 |    0|    2|    1|    1|    1|
+|iter block 2 |    0|  358|  322|  322|  322|
+
+|             | 1945| 1946| 1964| 1984| 2010|
+|:------------|----:|----:|----:|----:|----:|
+|iter block 1 |    0|    2|    2|    2|    2|
+|iter block 2 |    0|    2|    2|    2|    2|
+|iter block 3 |    0|    2|    2|    2|    2|
+|iter block 4 |    0|    2|    2|    2|    2|
+|iter block 5 |    0|    2|    2|    2|    2|
+|iter block 6 |    0|    2|    2|    2|    2|
+
 ###Back to simulations: Expectations mistake
 
 Section 3.7 of G&L analyses the impacts of a constant expectation on disposable income. In order to do that, we need to change the expectation equation in the model. This can be done with the `sfc.editEqu` function. We also need to set a value for the parameter
@@ -132,6 +159,8 @@ lines(simex_b$time,(simex_b$time>1959)*
 legend(x=1970,y=110,legend=c("GDP","Steady State GDP"),lty=c(2,1),bty="n")
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969060/12c36554-6ac8-11e6-9238-c1029d1128d5.png)
+
 This replicates figure 3.7 page 84
 ```{r}
 plot(simex_b$time,datasimex_b$scenario_1[,"H_s"],type="l",xlab="",ylab="")
@@ -141,3 +170,5 @@ lines(simex_b$time,datasimex_b$scenario_1[,"Yd_e"],lty=4)
 legend(x=1944,y=130,legend=c("Wealth","Consumption","Disposable Income",
                              "Expecetd Disposable Income"),lty=c(1,2,3,4),bty="n")
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969059/12c114a2-6ac8-11e6-9e2a-216606ae6cdc.png)
