@@ -10,7 +10,7 @@ install.packages("igraph")
 Once those packages have been installed, download the PK-SFC package on your computer and store it in a folder of your choice. Make sure that the name of the package is "PKSFC_1.5.tar.gz". Then run the following comand line. It will install the package from your local folder where 'pathToYourFolder' represent the path to the folder where you downloaded the package.
 
 ```{r, eval=F}
-install.packages("pathToYourFolder/PKSFC_1.2.tar.gz",repos = NULL, type="source")
+install.packages("pathToYourFolder/PKSFC_1.5.tar.gz",repos = NULL, type="source")
 ```
 
 You are almost set, now you need to load the package. In order to do so, you should run the following line. You might have some output but if no error message is being printed this means you are now ready to use the PK-SFC.
