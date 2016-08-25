@@ -7,7 +7,7 @@ Before doing any modelling, we need to load the package in the R environment.
 library(PKSFC)
 ```
 
-The, you need to download the two attached 'SIM.txt' and 'SIMEX.txt' file and save it in the folder of your choice. Make sure to set the working directory where you saved the downloaded file. In command line this looks like this but if you use Rstudio, you can use the graphical interface as well (Session>Set Working Directory>Choose Directory)
+The, you need to download the attached [PC.txt](https://github.com/S120/PKSFC/files/436974/PC.txt) file and save it in the folder of your choice. Make sure to set the working directory where you saved the downloaded file. In command line this looks like this but if you use Rstudio, you can use the graphical interface as well (Session>Set Working Directory>Choose Directory)
 ```{r, eval=FALSE}
 setwd("pathToYourDirectory")
 ```
@@ -29,6 +29,8 @@ We can now look at the graph of model PC:
 ```{r}
 plot.dag(pc,main="PC" )
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969236/02bfa734-6ac9-11e6-9b60-660b7ddbc743.png)
 
 You can see that there is a cycle in the graph, implying that GDP, taxes, disposable income and consumption are determined all together (and that they fully adapt to any shock applied to the economy). While this is a mathematical property of the system of equations representing the economy we wish to model, it has an economic meaning and you want to be sure that this is what you believe to be the best representation of what you have in mind.
 
@@ -58,6 +60,8 @@ Before simulatin the model, let's have a look at how the graph of the model has 
 plot.dag(pcRand,main="PC Random" )
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969238/02c06fc0-6ac9-11e6-9d15-b3dc53501741.png)
+
 You can now see that the cycle observed in the original model has disapeared. Indeed, consumption doesn't depend on disposable income anymore but on expected disposable income. Let's now simulate the model.
 ```{r}
 datapcRand<-simulate(pcRand,maxIter=2)
@@ -72,6 +76,8 @@ lines(pcRand$time,datapcRand$baseline[,"h_d"],lty=2,lwd=2)
 legend(x=1950,y=1.2*max(datapcRand$baseline[,c("h_h","h_d")],na.rm=T),
        legend=c("Money held","Money demand"),lty=c(2,1),lwd=2,bty="n")
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969235/02beaca8-6ac9-11e6-9401-13a6c9522ad3.png)
 
 This graph highlights the buffer role of certain stocks in PK-SFC models. Indeed, because expectations are incorrect or because demand might not be equal to supply in any market, at least one stock will not be equal to the targeted level. As highlighted by @Foley:1975, in a model without perfect foresight you need a buffer stock in order to obtain equilibrium between demand and supply. The role of buffer stocks in PK-SFC model is thus fundamental and is at the hart of the approach used by @Godley:1999c in his seven unsustainable processes. It is by observing the dynamics of certain stock-flow norms that you are able to observe the unsustainable processes evolving in an economy, because stocks precisely absorb disequilibrium.
 
@@ -109,6 +115,8 @@ legend(x=1970,y=0.78,legend=c("Share of Bills","Share of Money"),lty=c(2,1),lwd=
 grid()
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969239/02c2103c-6ac9-11e6-8536-fba831121e0d.png)
+
 This replicates fig 4.4 . p 113
 ```{r}
 time2=c(1950:2000)
@@ -118,4 +126,5 @@ legend(x=1970,y=88,legend=c("Disposable Income","Consumption"),lwd=c(2,2),lty=c(
 grid()
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17969237/02c00828-6ac9-11e6-8f12-fdb6db2a4dda.png)
 # References
