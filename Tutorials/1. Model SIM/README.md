@@ -1,6 +1,6 @@
 ###Setting up the environment
 
-This tutorial is meant to reproduce the graphs and tables of chapter 3 of Godley and Lavoie (2007, G&L for now on) and at the same time discover some of the tools provided by the package PK-SFC. 
+This tutorial is meant to reproduce the graphs and tables of chapter 3 of Godley and Lavoie (2007, G&L for now on) and at the same time discover some of the tools provided by the package PK-SFC. Download here the [source code for SIM](https://github.com/S120/PKSFC/files/436934/SIM.txt) and the [one for SIMEX](https://github.com/S120/PKSFC/files/436935/SIMEX.txt).
 
 Before doing any modelling, we need to load the package in the R environment. 
 ```{r}
@@ -130,6 +130,7 @@ lines(sim$time,(sim$time>1959)*(datasim$scenario_1["2010","Y"]-datasim$scenario_
       +datasim$scenario_1["1958","Y"])
 legend(x=1980,y=110,legend=c("GDP","Steady State GDP"),lty=c(2,1),bty="n")
 ```
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968778/944a1016-6ac6-11e6-8569-d4650a66259d.png)
 
 This replicates figure 3.2 page 73
 ```{r}
@@ -139,6 +140,8 @@ lines(sim$time,vector(length=length(sim$time))+datasim$baseline["2010","C_s"])
 legend(x=1970,y=50,legend=c("Disposable Income","Consumption","Steady State"),
        lty=c(2,3,1),bty="n")
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968779/944bf69c-6ac6-11e6-9ec3-150eff6991b0.png)
 
 This replicates figure 3.3 page 75
 ```{r}
@@ -150,6 +153,8 @@ plot(sim$time,(datasim$baseline[,"Yd"]-datasim$baseline[,"C_s"]),
 axis(4,pretty(c(0, 1.1*max(datasim$baseline[,"Yd"]-datasim$baseline[,"C_s"],na.rm=T))))
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968782/944ee4e2-6ac6-11e6-99e2-4fed76a7e06c.png)
+
 This replicates figure 3.4 page 76
 ```{r}
 plot(sim$time,datasim$scenario_1[,"Yd"],type="l",xlab="",ylab="",lty=2)
@@ -158,6 +163,8 @@ lines(sim$time,datasim$scenario_1[,"H_s"])
 legend(x=1970,y=90,legend=c("Disposable Income","Consumption","Wealth"),
        lty=c(2,3,1),bty="n")
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968781/944da94c-6ac6-11e6-8cad-5ab7524f60ed.png)
 
 ###Out of the steady state
 
@@ -177,3 +184,4 @@ lines(sim$time,datasim$scenario_1[,"Yd"],lty=3)
 legend(x=1980,y=95,legend=c("Wealth","Consumption","Disposable Income"),lty=c(1,2,3),bty="n")
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968780/944d346c-6ac6-11e6-9a8b-321df9df9704.png)
