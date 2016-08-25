@@ -43,6 +43,8 @@ lines(sim$time,vector(length=length(sim$time))+datasim$baseline["2010","C_s"])
 legend(x=1970,y=50,legend=c("Disposable Income","Consumption","Steady State"),lty=c(2,3,1),bty="n")
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968368/527a0f76-6ac4-11e6-9de0-8c9044f43c98.png)
+
 ###Source code of a model
 
 Before starting with the various models of Godley and Lavoie (2007), let's have a look at the structure of the source code we used to run the SIM model. The source code can be divided in three parts: 
@@ -118,6 +120,8 @@ plot.dag(sim, main="SIM" )
 plot.dag(simex, main="SIMEX" )
 ```
 
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968367/52607566-6ac4-11e6-88c8-02b0f19e3bb0.png)
+
 A close look at the two generated figures shows the fundamental difference between SIM and SIMEX. The SIM graph contains a cycle (all the nodes in red), that is it is composed by a system of dependent equations that determine GDP, Employment, Consumption, Taxes and Disposable income at once. Asside from the mathematical implication that a system of equation represent, it also has an economic meaning. It implies that the economy represented by SIM will adjust in one period to any shock applied to government spending. 
 
 On the other hand, SIMEX is a directed acyclical grapg (DAG). The cycle present in SIM has been broken by having consumption depend on expected disposable income which is equal to previous period disposable income. In this case, the economy represented by SIMEX will adjust slowly to a shock applied to government spending. This can be observed in the following plots.
@@ -143,6 +147,9 @@ lines(simex$time,datasimex$scenario_1[,"Yd_e"],lty=4)
 legend(x=1944,y=130,legend=c("Wealth","Consumption","Disposable Income",
                              "Expecetd Disposable Income"),lty=c(1,2,3,4),bty="n")
 ```
+
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968369/528e9180-6ac4-11e6-9448-7e8dc6434725.png)
+![alt tag](https://cloud.githubusercontent.com/assets/11057808/17968370/528ef40e-6ac4-11e6-8eb3-ea6352b752fd.png)
 
 Copyright (c) 2013 Antoine Godin
 
