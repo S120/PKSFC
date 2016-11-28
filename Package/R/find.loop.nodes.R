@@ -25,7 +25,6 @@ find.loop.nodes = function(adjacency, IGRAPH = FALSE){
     path_lengths = diag(adjacency %^% i)
     ans =c(ans,which(path_lengths > 0)) # return the positions of paths lenghts that are 
     # greater than zero ( offending nodes )
-    
   }
   return(sort(unique(ans)))
 }

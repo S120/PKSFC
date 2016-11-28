@@ -19,10 +19,12 @@ sfc.addEqu<-function(model=stop("Need a model"),var=stop("Need a variable name!"
   equation<-trim(equation)
   #replacing all lags. This might be an issue if there are a lag of 2 but not of 1.
   lag=1
-  while(grepl(paste("(-",lag,")",sep=""),equation)){
-    equation=gsub(paste("(-",lag,")",sep=""), paste("_",lag,sep=""),equation , fixed = T)
-    lag=lag+1
+  while(grepl("^.*?\\(-[0-9]+\\).*$",equation)){
+  	temp<-substr(equation,start=(regexpr("\\(-[0-9]+\\)",equation)+2),stop=nchar(equation))
+  	lag<-as.numeric(substr(temp,start=1,stop=(regexpr("\\)",temp)-1)))
+  	equation=gsub(paste("(-",lag,")",sep=""), paste("_",lag,sep=""),equation , fixed = T)
   }
+  
   
   if(is.null(model$equations)){
     equations<-matrix(nrow=1,ncol=3,dimnames=list(NULL,c("endogenous value","equation","description")))
