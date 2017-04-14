@@ -14,7 +14,7 @@
 #' @export
 
 sfc.addScenario <- function(model=stop("Need a model"),vars=stop("Need variables"),values=stop("Need values"),inits=stop("Need starting values"),ends=stop("Need ending values"),starts=NA){
-  if(length(vars)!=length(values)&&length(vars)!=length(inits)&&length(vars)!=length(ends)){
+  if(length(vars)!=length(values)|length(vars)!=length(inits)|length(vars)!=length(ends)){
     stop("Check vars, values, inits and ends")
   }else{
     if(is.null(model$scenarios)){
