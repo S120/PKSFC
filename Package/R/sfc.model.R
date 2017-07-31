@@ -57,7 +57,8 @@ sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F){
   
   for (i in 1:length(modelText)) {
     lineText = modelText[i]
-    if (!grepl("#", lineText)) {
+    lineText <- sub("#.*", "", lineText) ## Remove any trailing comment
+    if (!grepl("^[[:blank:]]*$", lineText)) { ## Skip empty lines or lines containing only spaces
       if(grepl("timeline", lineText)){
         myTable = strsplit(lineText, " ")
         initYears=myTable[[1]][2]
