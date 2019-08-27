@@ -90,9 +90,9 @@ sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F){
           }else{
             indVar<-sfc.getIndex(model,var=nameEndSearch)
             if(indVar>0){
-              model<-sfc.editVar(model,ind=indEnd,init=value)
+              model<-sfc.editVar(model,ind=indVar,init=value)
             }else{
-              if(grepl("#",modelText[i-1])){
+              if(i>2&grepl("#",modelText[i-1])){
                 display=substring(modelText[i-1],2)
               }else{
                 display=""
