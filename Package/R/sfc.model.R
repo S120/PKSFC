@@ -34,7 +34,7 @@
 #' @export
 
 
-sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F){
+sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F,trends=NULL,trendsVars=NULL){
   options(warn=-1)
   
   model<-sfc.create(modelName)
@@ -115,5 +115,20 @@ sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F){
   options(warn=0)
   
   model<-sfc.check(model,fill=fill)
+  
+  variablesMat<-matrix(data=0,nrow=length(model$time),ncol=length(model$variables[,1]),dimnames=list(c(model$time),c(model$variables[,1])))
+  for(i in 1:length(model$variables[,1])){
+  	variablesMat[,i]=as.double(model$variables[i,2])
+  }
+  if(!is.null(trends)){
+  	if(is.null(trendsVars))
+  		stop("trends and trendsVars are both needed.")
+  	else{
+  		for(j in 1:length(trendsVars)){
+  			variablesMat[,trendsVars[j]]=trends[,j]
+  		}
+  	}
+  }
+  model$baselineMat = variablesMat
   return(model)
 }

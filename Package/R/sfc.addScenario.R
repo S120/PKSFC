@@ -14,27 +14,39 @@
 #' @export
 
 sfc.addScenario <- function(model=stop("Need a model"),vars=stop("Need variables"),values=stop("Need values"),inits=stop("Need starting values"),ends=stop("Need ending values"),starts=NA){
-  if(length(vars)!=length(values)|length(vars)!=length(inits)|length(vars)!=length(ends)){
-    stop("Check vars, values, inits and ends")
-  }else{
-    if(is.null(model$scenarios)){
-      scenario<-{}
-      j=0
-    }
-    else{
-      scenario<-model$scenarios
-      j=length(scenario)
-    }
-    for(i in 1:length(vars)){
-      scen<-{}
-      scen$var=vars[[i]]
-      scen$value=values[[i]]
-      scen$init=inits[i]-1
-      scen$end=ends[i]
-      scen$start=starts
-      scenario[[i+j]]<-scen
-    }
-  }
-  model$scenarios<-scenario
-  return(model)
+	if(length(vars)!=length(values)|length(vars)!=length(inits)|length(vars)!=length(ends)){
+		stop("Check vars, values, inits and ends")
+	}else{
+		if(is.null(model$scenarios)){
+			scenario<-{}
+			nbScen=0
+		}
+		else{
+			scenario<-model$scenarios
+			nbScen=length(scenario)
+		}
+		for(iScen in 1:length(vars)){
+			scen<-{}
+			var <- vars[[iScen]]
+			val <- values[[iScen]]
+			init <- inits[iScen]-1
+			end <- ends[iScen]
+			start <- starts[[iScen]]
+			variablesMat <- variablesMat <- model$baselineMat
+			if(sum(is.na(start))!=length(start)){
+				for(j in 1:length(names(start))){
+					if(!grepl("block",names(start)[j])){
+						variablesMat[as.character(seq(from=model$time[1],to=init)),names(start)[j]]=as.double(start[j])	
+					}
+				}
+			}
+			for(j in 1:length(var)){
+				variablesMat[as.character(seq(from=init,to=end)),var[j]]=as.double(val[j])
+			}
+			scen$mat<-variablesMat
+			scenario[[iScen+nbScen]]<-scen
+		}
+	}
+	model$scenarios<-scenario
+	return(model)
 }

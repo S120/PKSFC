@@ -1,7 +1,7 @@
 Package: PKSFC
 Title: post keynesian stock flow consistent modelling
-Version: 1.5
-Date: 24-10-2014
+Version: 1.6
+Date: 18-02-2020
 Author: Antoine Godin <Antoine.Godin@ul.ie>
 Maintainer: Antoine Godin <Antoine.Godin@ul.ie>
 Description: Package (beta version) to simulate Post-Keynesian Stock-Flow

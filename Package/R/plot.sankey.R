@@ -1,11 +1,10 @@
 #' Plots the sankey of a specific dataset.
 #' 
-#' Reformats an sfc object into a format that can be used by sfc.GaussSeidel.
-#' 
-#' @param object sfc object
-#' @param check would you like to run a test for missing information?
-#' @return a list of strings consistent with what is required to get the GaussSeidel
-#' algorithm to work.
+#' @param dataset a matrix containing the results of an SFC simulation where the column names corresponds to the variables of the model
+#' @param filename A csv file containing a Flow Matrix in symbolic form, using the same name of variables than the dataset
+#' @param outputfile The name of the file to generate containing the plot
+#' @param period The period to use for the values in the Sankey
+#' @return a Sankey plot.
 #' 
 #' @export
 #' @author Antoine Godin
