@@ -36,7 +36,7 @@ sfc.addScenario <- function(model=stop("Need a model"),vars=stop("Need variables
 			scen<-{}
 			var <- vars[[iScen]]
 			val <- values[[iScen]]
-			init <- inits[iScen]-1
+			init <- inits[iScen]
 			end <- ends[iScen]
 			variablesMat <- model$baselineMat
 			if(sum(is.na(starts))!=length(starts)){

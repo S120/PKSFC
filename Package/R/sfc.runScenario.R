@@ -16,48 +16,55 @@
 
 
 sfc.runScenario<-function(model,data,tolValue,maxIter,equations,blocks,variables,prev){
-  iterations <- length(model$time)
-  GSiterations<-matrix(0,nrow=iterations,ncol=length(equations),dimnames=list(model$time,paste("iter block",seq(1:length(equations)))))
-  
-  for (t in 2:iterations) {
-    
-    for(i in 1:length(model$variables[,1])){
-      varName<-model$variables[i,1]
-      if(is.na(data[t-1,varName])){
-        variables[varName]=1
-      }else{
-        variables[varName]=data[t-1,varName]
-      }
-    }
-    for(i in 1:length(model$endog[,3])){
-      if(model$endog[i,3]>0){
-        for(j in 1:model$endog[i,3]){
-          varName<-model$endog[i,1]
-          prevName=paste(varName,"_",j,sep="")
-          lag<-t-j
-          if(lag<1){
-            lag<-1
-          }
-          prev[prevName]=data[lag,varName]
-        }
-      }
-    }
-    for (b in 1:length(equations)) {
-      blockOfEquations <- equations[[b]]
-      varNames<-names(blockOfEquations)
-      resultGS<-sfc.GaussSeidel(blockOfEquations, tolValue,maxIter,variables,prev)
-      values<-resultGS$values
-      GSiterations[t,b]<-resultGS$iterations
-      for(i in 1:length(blockOfEquations)){
-        #				print(variables[varNames[i]])
-        variables[varNames[i]]<-values[[varNames[i]]]
-        #				print(variables[varNames[i]])
-        data[t,varNames[i]]=values[[varNames[i]]]
-      }
-      
-    }
-  }	
-  
-  data<-cbind(data,GSiterations)
-  return(data)
+	iterations <- length(model$time)
+	GSiterations<-matrix(0,nrow=iterations,ncol=length(equations),dimnames=list(model$time,paste("iter block",seq(1:length(equations)))))
+	
+	for (t in 2:iterations) {
+		
+		for(i in 1:length(model$variables[,1])){
+			varName<-model$variables[i,1]
+			#We need to give a value for parameters and endogenous variables. If it is an endogenous variable, it needs an initial value for the Gauss-Seidl Algorithm. We assume that last period is a good one and if last period is NA, we set the initial value to 1 arbitrarily. In the case of parameters, the matrix data contains the value for each period of the simulation so we use this period.
+			if(is.na(data[t,varName])){
+				#Endoegnous variables have NA value by default, hence if the value at time t is NA, it is an endogenous variable. Otherwise it is a parameter.
+				if(is.na(data[t-1,varName])){
+					variables[varName]=1
+				}else{
+					variables[varName]=data[t-1,varName]
+				}
+			}else{
+				#This is the case for parameters
+				variables[varName]=data[t,varName]
+			}
+		}
+		for(i in 1:length(model$endog[,3])){
+			if(model$endog[i,3]>0){
+				for(j in 1:model$endog[i,3]){
+					varName<-model$endog[i,1]
+					prevName=paste(varName,"_",j,sep="")
+					lag<-t-j
+					if(lag<1){
+						lag<-1
+					}
+					prev[prevName]=data[lag,varName]
+				}
+			}
+		}
+		for (b in 1:length(equations)) {
+			blockOfEquations <- equations[[b]]
+			varNames<-names(blockOfEquations)
+			resultGS<-sfc.GaussSeidel(blockOfEquations, tolValue,maxIter,variables,prev)
+			values<-resultGS$values
+			GSiterations[t,b]<-resultGS$iterations
+			for(i in 1:length(blockOfEquations)){
+				#				print(variables[varNames[i]])
+				variables[varNames[i]]<-values[[varNames[i]]]
+				#				print(variables[varNames[i]])
+				data[t,varNames[i]]=values[[varNames[i]]]
+			}
+			
+		}
+	}	
+	
+	data<-cbind(data,GSiterations)
+	return(data)
 }

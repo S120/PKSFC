@@ -31,11 +31,10 @@ sfc.addScenarioTrend <- function(model=stop("Need a model"),vars=stop("Need vari
 			nbScen=length(scenario)
 		}
 		for(iScen in 1:length(vars)){
-			#TODO: TEST LENGTH OF TREND WITH LENGTH OF TIME IN MODEL
 			scen<-{}
 			var=vars[[iScen]]
 			trend=trends[[iScen]]
-			if(ncol(trend)!=(model$time[2]+1-model$time[1]))
+			if(dim(trend)[1]!=length(model$time))
 					stop("Trend length is not consistent with timelength of model")
 			else{
 				variablesMat <- model$baselineMat
