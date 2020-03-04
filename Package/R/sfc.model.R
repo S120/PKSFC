@@ -35,100 +35,114 @@
 
 
 sfc.model <-function(fileName,dataFile=NA,modelName="SFCmodel",fill=F,trends=NULL,trendsVars=NULL){
-  options(warn=-1)
-  
-  model<-sfc.create(modelName)
-  
-  if(!is.na(dataFile)){
-    data <- read.csv(dataFile)
-    variablesName <- names(data)
-    for(i in 2:length(data[1,])){
-      model<-sfc.addVar(model,var=variablesName[i],init=data[1,i],desc="")
-    }
-    model<-sfc.setYear(model,as.numeric(data[1,1]),as.numeric(data[length(data[,1]),1]))
-  }
-  
-  
-  options(warn=-1)
-  modelFile <- file(fileName)
-  modelText <- readLines(modelFile, n = -1)
-  close(modelFile)
-  firstEquation=TRUE
-  
-  for (i in 1:length(modelText)) {
-    lineText = modelText[i]
-    lineText <- sub("#.*", "", lineText) ## Remove any trailing comment
-    if (!grepl("^[[:blank:]]*$", lineText)) { ## Skip empty lines or lines containing only spaces
-      if(grepl("timeline", lineText)){
-        myTable = strsplit(lineText, " ")
-        initYears=myTable[[1]][2]
-        endYears=myTable[[1]][3]
-        model<-sfc.setYear(model,initYears,endYears)
-      }else{
-        myTable = strsplit(lineText, "=")
-        
-        #This is to manage the case when there are other = in the equation (use of logical operators)
-        if(length(myTable[[1]])>2){
-          tempStr<-myTable[[1]][2]
-          for(iter in 3:length(myTable[[1]])){
-            tempStr<-paste(tempStr,myTable[[1]][3],sep="=")
-            myTable[[1]]=myTable[[1]][-3]
-          }
-          myTable[[1]][2]=tempStr
-        }
-        #Replacing all reseverved words, for now only in-> inv
-        nameEnd = myTable[[1]][1]
-        equation = myTable[[1]][2]
-        equation<-trim(equation)
-        value<-as.double(equation)
-        if(!is.na(value)){
-          nameEndSearch = gsub("\\bin\\b","inv",nameEnd)
-          nameEndSearch<-trim(nameEndSearch)
-          indEnd<-sfc.getIndex(model,end=nameEndSearch)
-          if(indEnd>0){
-            model<-sfc.editEnd(model,ind=indEnd,init=value)
-          }else{
-            indVar<-sfc.getIndex(model,var=nameEndSearch)
-            if(indVar>0){
-              model<-sfc.editVar(model,ind=indVar,init=value)
-            }else{
-              if(i>2&grepl("#",modelText[i-1])){
-                display=substring(modelText[i-1],2)
-              }else{
-                display=""
-              }			
-              model<-sfc.addVar(model,var=nameEnd,init=value,desc=display)
-            }
-          }
-        }else{
-          if(grepl("#",modelText[i-1])){
-            displayEquation=substring(modelText[i-1],2)
-          }else{
-            displayEquation=""
-          }			
-          model<-sfc.addEqu(model,nameEnd,equation,displayEquation)
-        }
-      }
-    }
-  }
-  
-  options(warn=0)
-  
-  model<-sfc.check(model,fill=fill)
-  
-  variablesMat<-matrix(data=0,nrow=length(model$time),ncol=length(model$variables[,1]),dimnames=list(c(model$time),c(model$variables[,1])))
-  for(i in 1:length(model$variables[,1])){
-  	variablesMat[,i]=as.double(model$variables[i,2])
-  }
-  if(!is.null(trends)){
-  	if(is.null(trendsVars))
-  		stop("trends and trendsVars are both needed.")
-  	else{
-  		for(j in 1:length(trendsVars)){
-  			variablesMat[,trendsVars[j]]=trends[,j]
-  		}
-  	}
-  }
-  model$baselineMat = variablesMat
-  return(model)
+	options(warn=-1)
+	
+	model<-sfc.create(modelName)
+	
+	if(!is.na(dataFile)){
+		data <- read.csv(dataFile)
+		variablesName <- names(data)
+		for(i in 2:length(data[1,])){
+			model<-sfc.addVar(model,var=variablesName[i],init=data[1,i],desc="")
+		}
+		model<-sfc.setYear(model,as.numeric(data[1,1]),as.numeric(data[length(data[,1]),1]))
+	}
+	
+	
+	options(warn=-1)
+	modelFile <- file(fileName)
+	modelText <- readLines(modelFile, n = -1)
+	close(modelFile)
+	firstEquation=TRUE
+	
+	for (i in 1:length(modelText)) {
+		lineText = modelText[i]
+		lineText <- sub("#.*", "", lineText) ## Remove any trailing comment
+		if (!grepl("^[[:blank:]]*$", lineText)) { ## Skip empty lines or lines containing only spaces
+			if(grepl("timeline", lineText)){
+				myTable = strsplit(lineText, " ")
+				initYears=myTable[[1]][2]
+				endYears=myTable[[1]][3]
+				model<-sfc.setYear(model,initYears,endYears)
+			}else{
+				myTable = strsplit(lineText, "=")
+				
+				#This is to manage the case when there are other = in the equation (use of logical operators)
+				if(length(myTable[[1]])>2){
+					tempStr<-myTable[[1]][2]
+					for(iter in 3:length(myTable[[1]])){
+						tempStr<-paste(tempStr,myTable[[1]][3],sep="=")
+						myTable[[1]]=myTable[[1]][-3]
+					}
+					myTable[[1]][2]=tempStr
+				}
+				#Replacing all reseverved words, for now only in-> inv
+				nameEnd = myTable[[1]][1]
+				equation = myTable[[1]][2]
+				equation<-trim(equation)
+				value<-as.double(equation)
+				if(!is.na(value)){
+					nameEndSearch = gsub("\\bin\\b","inv",nameEnd)
+					nameEndSearch<-trim(nameEndSearch)
+					indEnd<-sfc.getIndex(model,end=nameEndSearch)
+					if(indEnd>0){
+						model<-sfc.editEnd(model,ind=indEnd,init=value)
+					}else{
+						indVar<-sfc.getIndex(model,var=nameEndSearch)
+						if(indVar>0){
+							model<-sfc.editVar(model,ind=indVar,init=value)
+						}else{
+							if(i>2&grepl("#",modelText[i-1])){
+								display=substring(modelText[i-1],2)
+							}else{
+								display=""
+							}			
+							model<-sfc.addVar(model,var=nameEnd,init=value,desc=display)
+						}
+					}
+				}else{
+					if(grepl("#",modelText[i-1])){
+						displayEquation=substring(modelText[i-1],2)
+					}else{
+						displayEquation=""
+					}			
+					model<-sfc.addEqu(model,nameEnd,equation,displayEquation)
+				}
+			}
+		}
+	}
+	
+	options(warn=0)
+	#Adding the first value of the trended variable before checking for the completeness of the model
+	if(!is.null(trends)){
+		if(is.null(trendsVars))
+			stop("trends and trendsVars are both needed.")
+		else{
+			for(i in 1:length(trendsVars)){
+				indVar<-sfc.getIndex(model,var=trendsVars[i])
+				if(indVar>0){
+					model<-sfc.editVar(model,ind=indVar,init=trends[1,i])
+				}else{
+					model<-sfc.addVar(model,var=trendsVars[i],init=trends[1,i],desc="")
+				}
+			}
+		}
+	}
+	model<-sfc.check(model,fill=fill)
+	
+	variablesMat<-matrix(data=0,nrow=length(model$time),ncol=length(model$variables[,1]),dimnames=list(c(model$time),c(model$variables[,1])))
+	for(i in 1:length(model$variables[,1])){
+		variablesMat[,i]=as.double(model$variables[i,2])
+	}
+	if(!is.null(trends)){
+		if(is.null(trendsVars))
+			stop("trends and trendsVars are both needed.")
+		else{
+			for(j in 1:length(trendsVars)){
+				variablesMat[,trendsVars[j]]=trends[,j]
+			}
+		}
+	}
+	model$baselineMat = variablesMat
+	return(model)
 }
