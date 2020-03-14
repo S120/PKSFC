@@ -1,11 +1,3 @@
----
-title: "Adding Trends"
-output:
-  pdf_document: default
-  word_document: default
----
-
-
 ###Setting up the environment
 
 This tutorial will show you how to use exogenous trends into an SFC model, using the model SIMEX as an example.

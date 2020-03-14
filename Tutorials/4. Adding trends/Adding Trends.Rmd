@@ -2,7 +2,6 @@
 title: "Adding Trends"
 output:
   pdf_document: default
-  word_document: default
 ---
 
 
