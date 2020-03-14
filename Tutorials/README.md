@@ -90,20 +90,15 @@ A few important points regarding the model source code:
 
 ###Direct Acyclical Graph
 
-The following paper [Visualising Stock Flow Consistent Models as Directed Acyclic Graphs](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2492242), shows how any PK-SFC model can be seen as a directed graph (DG) and allows for a different representation than the traditional Transaction-Flow and Balance Sheet Matrices. Obviously these representations are more useful for large models than small models. The package includes the functions needed to obtain the DG representation. However, in order to use these functionalities, the package `Rgraphviz` needs to be installed. Because it is not stored in CRAN, you need to use the following commands to install it.
+The following paper [Visualising Stock Flow Consistent Models as Directed Acyclic Graphs](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2492242), shows how any PK-SFC model can be seen as a directed graph (DG) and allows for a different representation than the traditional Transaction-Flow and Balance Sheet Matrices. Obviously these representations are more useful for large models than small models. The package includes the functions needed to obtain the DG representation. 
 
-According to the latest [README](http://www.bioconductor.org/packages/2.11/bioc/readmes/Rgraphviz/README):
-
-```{r,eval=FALSE}
-Rgraphviz now comes bundles with Graphviz. This should greatly simplify installation 
-on all platforms, compared with earlier versions.
-```
-
-Bioconductor 2.11 contains a lot of libraries that you might not want or need, but it does seem to be the easiest path to achieving what you want. These are the instructions on the [Rgraphviz homepage](http://www.bioconductor.org/packages/2.11/bioc/html/Rgraphviz.html):
+However, in order to use these functionalities, the package `Rgraphviz` needs to be installed. Because it is not stored in CRAN, you need to use the following commands to install it.  Bioconductor 3.11 contains a lot of libraries that you might not want or need, but it does seem to be the easiest path to achieving what you want. These are the instructions on the [Rgraphviz homepage](https://bioconductor.org/packages/release/bioc/html/Rgraphviz.html):
 
 ```{r,eval=F}
-source("http://bioconductor.org/biocLite.R")
-biocLite("Rgraphviz")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("Rgraphviz")
+
 ```
 
 In order to test for the success of the installation:
