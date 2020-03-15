@@ -1,4 +1,4 @@
-###Setting up the environment
+##Setting up the environment
 
 This tutorial will show you how to use exogenous trends into an SFC model, using the model SIMEX as an example.
 
@@ -12,7 +12,7 @@ The, you need to download the attached 'SIMEX.txt' file and save it in the folde
 setwd("pathToYourDirectory")
 ```
 
-###Loading the model
+##Loading the model and simulating it
 
 The first thig to do is to load the model.
 ```{r}
@@ -34,6 +34,8 @@ legend(x=1970,y=50,legend=c("Disposable Income","Expected Disposable Income","St
 ```
 
 ![alt tag](https://user-images.githubusercontent.com/11057808/76703412-dc649a00-66d1-11ea-8700-932df97ad812.png)
+
+##Adding trends
 
 Let's imagine now, that instead of using a constant value for the propensities to consume you want to introduce a moving value, say a sinusoidal around their initial value. We can generate a new scenario with trended values using the option `trends` as follows:
 ```{r}
